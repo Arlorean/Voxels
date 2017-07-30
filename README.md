@@ -33,3 +33,9 @@ The [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/
 1. [WiX Toolset](http://wixtoolset.org/) - ~~Simple~~ XML based windows installer scripting
 
 The 3x3x3.vox, 8x8x8.vox files are directly from the [MagicaVoxel](https://ephtracy.github.io/) distribution for authentic testing.
+
+# TODO
+
+* Fix wix installer to uninstall as well
+* Put a GUI on the installer
+* Add shell context menus to export PNG/SVG interactively 

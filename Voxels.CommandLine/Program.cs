@@ -8,7 +8,7 @@ using Voxels.SkiaSharp;
 namespace Voxels.CommandLine {
     class Program {
         static void Main(string[] args) {
-            var filename = args.Length == 1 ? args[0] : "monu9.vox"; // "3x3x3.vox";
+            var filename = args.Length == 1 ? args[0] : "3x3x3.vox";
             using (var stream = File.OpenRead(filename)) {
                 var voxelData = MagicaVoxel.Read(stream);
 

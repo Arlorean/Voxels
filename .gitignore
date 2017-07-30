@@ -6,3 +6,14 @@
 /Voxels/obj
 /Voxels.CommandLine/obj
 *.cache
+/packages
+/packages
+/Voxels/bin/Debug
+/Voxels.CommandLine/bin/Debug
+/Voxels.Installer/bin/Debug
+/Voxels.Installer/obj/Debug
+/Voxels.ShellExtensions/bin/Debug
+/Voxels.ShellExtensions/obj/Debug
+/Voxels.SkiaSharp/bin/Debug
+/Voxels.Test/bin/Debug
+/Voxels.Test/obj/Debug

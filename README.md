@@ -8,6 +8,14 @@ The [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/
 
 ![Windows Explorer Thumbnails](Voxels.Website/WindowsExplorer.png)
 
+# PNG and SVG output
+
+The Voxels.CommandLine tool converts .vox files to .png and .svg. Here is the sample 3x3x3.vox file converted:
+
+PNG             |  SVG
+----------------|-------------------------
+![PNG](Voxels.Website/3x3x3.png)  |  ![SVG](https://cdn.rawgit.com/Arlorean/Voxels/3f990345/Voxels.Website/3x3x3.svg)
+
 # Quick Build
 
 1. Install ``Visual Studio 2017``

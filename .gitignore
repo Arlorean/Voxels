@@ -17,3 +17,15 @@
 /Voxels.SkiaSharp/bin/Debug
 /Voxels.Test/bin/Debug
 /Voxels.Test/obj/Debug
+/Voxels/bin/Release
+/Voxels.CommandLine/bin/Release
+/Voxels.CommandLine/bin/Release/x64
+/Voxels.CommandLine/bin/Release/x86
+/Voxels.Installer/bin/Release
+/Voxels.Installer/obj/Release
+/Voxels.ShellExtensions/bin/Release
+/Voxels.ShellExtensions/obj/Release
+/Voxels.SkiaSharp/bin/Release
+/Voxels.SkiaSharp/obj
+/Voxels.Test/bin/Release
+/Voxels.Test/obj/Release

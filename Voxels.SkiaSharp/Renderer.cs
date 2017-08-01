@@ -43,7 +43,7 @@ namespace Voxels.SkiaSharp {
                     }
                 }
             }
-            return ms.GetBuffer();
+            return ms.ToArray();
         }
 
         static XYZ[] TopCorners = new[] {
@@ -111,8 +111,8 @@ namespace Voxels.SkiaSharp {
 
                     // Calculate Ambient Occlusion
                     using (var fill = new SKPaint {
-                        IsAntialias = true,
-                        Style = SKPaintStyle.StrokeAndFill,
+                        IsAntialias = false,
+                        Style = SKPaintStyle.Fill,
                         //Shader = SKShader.CreateLinearGradient(p[0], p[2],
                         //    new[] { SKColors.White, SKColors.White },
                         //    null,

@@ -4,7 +4,7 @@ C# utilities for reading/writing/rendering [MagicaVoxel](https://ephtracy.github
 
 # Windows Explorer Thumbnails
 
-The [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/v1.0.0.2/Voxels.Installer.msi) provides Windows Explorer Thumbnails for MagicaVoxel .vox files:
+The [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/v1.0.0.3/Voxels.Installer.msi) provides Windows Explorer Thumbnails for MagicaVoxel .vox files:
 
 ![Windows Explorer Thumbnails](Voxels.Website/WindowsExplorer.png)
 

@@ -31,14 +31,15 @@ PNG             |  SVG
 1. Open ``Voxels.sln``
 1. Install [WiX Toolset](http://wixtoolset.org/) v3.11
 1. Install [Wix Toolset Visual Studio 2017 Extension](https://marketplace.visualstudio.com/items?itemName=RobMensching.WixToolsetVisualStudio2017Extension)
-1. Build ``Voxels.Installer`` to create the [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/v1.0.0.2/Voxels.Installer.msi) setup file. 
+1. Build ``Voxels.Installer`` to create the [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/v1.0.0.3/Voxels.Installer.msi) setup file. 
 
-# Third Party Components
+# Third Party Credits
 
 1. [SkiaSharp](https://github.com/mono/SkiaSharp) - Xamarin C# wrapper for Google's Skia 2D rendering library
 1. [SharpShell](https://github.com/dwmkerr/sharpshell) - Dave Kerr's ShellExtensions Library for .NET
 1. [SharpShellTools](https://github.com/dwmkerr/sharpshell) - Dave Kerr's ShellExtensions Tools for .NET
 1. [WiX Toolset](http://wixtoolset.org/) - ~~Simple~~ XML based windows installer scripting
+1. [Ambient Occlusion](https://0fps.net/2013/07/03/ambient-occlusion-for-minecraft-like-worlds/) algorithm by [Mikola Lysenko](https://github.com/mikolalysenko).
 
 The 3x3x3.vox, 8x8x8.vox files are directly from the [MagicaVoxel](https://ephtracy.github.io/) distribution for authentic testing.
 

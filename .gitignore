@@ -6,6 +6,7 @@
 /Voxels/obj
 /Voxels.CommandLine/obj
 *.cache
+*.csproj.user
 /packages
 /packages
 /Voxels/bin/Debug

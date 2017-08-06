@@ -10,11 +10,11 @@ The [Voxels.Installer.msi](https://github.com/Arlorean/Voxels/releases/download/
 
 # PNG and SVG output
 
-The Voxels.CommandLine tool converts .vox files to .png and .svg. Here is the sample 3x3x3.vox file converted:
+The Voxels.CommandLine tool converts .vox files to .png and .svg. Here is my example [wizard.vox](Voxels.CommandLine/wizard.vox) file converted:
 
 PNG             |  SVG
 ----------------|-------------------------
-![PNG](Voxels.Website/3x3x3.png)  |  ![SVG](https://cdn.rawgit.com/Arlorean/Voxels/3f990345/Voxels.Website/3x3x3.svg)
+![PNG](Voxels.Website/wizard.png)  |  ![SVG](https://cdn.rawgit.com/Arlorean/Voxels/df6f605a/Voxels.Website/wizard.svg)
 
 # Quick Build
 
@@ -23,7 +23,7 @@ PNG             |  SVG
 1. Set ``Voxels.CommandLine`` as the startup project
 1. Press ``Start`` in Visual Studio 2017
 1. Open Windows Explorer on the ``Voxels.CommandLine\bin\Debug directory``
-1. There should be two new files: ``output{GUID}.png`` and ``output{GUID}.svg``
+1. There should be two new files: ``wizard.png`` and ``wizard.svg``
 
 # Installer Build
 
@@ -44,7 +44,4 @@ The 3x3x3.vox, 8x8x8.vox files are directly from the [MagicaVoxel](https://ephtr
 
 # TODO
 
-* Fix wix installer to uninstall as well
-* Put a GUI on the installer
 * Add shell context menus to export PNG/SVG interactively 
-* Fix bug with SVG faces not lining up correctly

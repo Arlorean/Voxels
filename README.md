@@ -1,6 +1,6 @@
 # MagicaVoxel Windows Explorer Thumbnails
 
-The [Voxels.Setup.exe](https://github.com/Arlorean/Voxels/releases/download/v1.1/Voxels.Setup.exe) provides Windows Explorer Thumbnails for MagicaVoxel .vox files:
+The [Voxels.Setup.exe](https://github.com/Arlorean/Voxels/releases/download/v1.1/Voxels.Setup.exe) provides Windows Explorer Thumbnails for [MagicaVoxel](https://ephtracy.github.io/) [.vox files](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt):
 
 ![Windows Explorer Thumbnails](Voxels.Website/WindowsExplorer.png)
 
@@ -15,10 +15,6 @@ The Voxels.CommandLine.exe tool converts .vox files to .png and .svg (512x512). 
 PNG             |  SVG
 ----------------|-------------------------
 ![PNG](Voxels.Website/wizard.png)  |  ![SVG](https://cdn.rawgit.com/Arlorean/Voxels/df6f605a/Voxels.Website/wizard.svg)
-
-# Voxels
-
-C# utilities for reading/writing/rendering [MagicaVoxel](https://ephtracy.github.io/) [.vox files](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt). 
 
 # Command Line Build
 

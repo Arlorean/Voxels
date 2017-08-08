@@ -1,8 +1,6 @@
 ﻿using SkiaSharp;
-using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Voxels.SkiaSharp {
     public class Renderer {
@@ -28,7 +26,7 @@ namespace Voxels.SkiaSharp {
                     using (var data = image.Encode()) {
                         var ms = new MemoryStream();
                         data.SaveTo(ms);
-                        return ms.GetBuffer();
+                        return ms.ToArray();
                     }
                 }
             }
@@ -171,48 +169,5 @@ namespace Voxels.SkiaSharp {
             }
             return SKColor.FromHsv(h, s, v * r, c.Alpha);
         }
-
-        static void RenderQuad(VoxelData voxelData, XYZ i, SKCanvas canvas, SKMatrix44 matrix, Color color, XYZ[] corners) {
-            var up = corners.Aggregate((a,b) => a+b)/4;
-
-            // Only render quad if face it isn't hidden by voxel above it
-            if (voxelData[i + up].colorIndex == 0) {
-                // Map voxel coordinates to projected 3D space
-                var p = corners.Select(c => c+XYZ.One)
-                               .Select(c => matrix.MapScalars(i.X + c.X*.5f, i.Z + c.Z*.5f, -i.Y - c.Y*.5f, 1f))
-                               .Select(v => new SKPoint(v[0], v[1]))
-                               .ToArray();
-
-                // Create face quad path
-                using (var face = new SKPath()) {
-                    face.AddPoly(new[] { p[0], p[1], p[2], p[3] }, close: true);
-
-                    // Calculate Ambient Occlusion
-                    using (var fill = new SKPaint {
-                        IsAntialias = false,
-                        Style = SKPaintStyle.Fill,
-                        //Shader = SKShader.CreateLinearGradient(p[0], p[2],
-                        //    new[] { SKColors.White, SKColors.White },
-                        //    null,
-                        //SKShaderTileMode.Clamp),
-                        Color = new SKColor(color.R, color.G, color.B, color.A),
-                    }) {
-                        canvas.DrawPath(face, fill);
-                    }
-                }
-            }
-        }
-
-
-        [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        extern static IntPtr LoadLibrary(string dllPath);
-
-        static Renderer() {
-            var dir = Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-            var arch = IntPtr.Size == 8 ? "x64" : "x86";
-            var path = Path.Combine(dir, arch, "libSkiaSharp.dll");
-            LoadLibrary(path);
-        }
-
     }
 }

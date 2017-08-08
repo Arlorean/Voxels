@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define Voxels.ShellExtensions_TargetDir=$(var.Voxels.ShellExtensions.TargetDir)?>
-	<Product Id="*" Name="Voxels.Installer" Language="1033" Version="1.0.0.3" Manufacturer="Arlorean" UpgradeCode="70e5c55f-1a55-4856-a0fc-a82ece384a74">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Voxels.Installer" Language="1033" Version="1.1.0.0" Manufacturer="Arlorean" UpgradeCode="70e5c55f-1a55-4856-a0fc-a82ece384a74">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
@@ -35,22 +35,25 @@
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<Component Id="Voxels.ShellExtensions.dll" Guid="eced76bf-65e4-4dd4-92fc-757bf1d60ae2">
-			  <File Id="Voxels.ShellExtensions.dll" Name="Voxels.ShellExtensions.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)Voxels.ShellExtensions.dll" />
+			  <File Id="Voxels.ShellExtensions.dll" Name="Voxels.ShellExtensions.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)Voxels.ShellExtensions.dll" />
 			</Component>
 			<Component Id="Voxels.SkiaSharp.dll" Guid="1d21f5cc-cf46-4d58-86f4-dc21561c5550">
-			  <File Id="Voxels.SkiaSharp.dll" Name="Voxels.SkiaSharp.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)Voxels.SkiaSharp.dll" />
+			  <File Id="Voxels.SkiaSharp.dll" Name="Voxels.SkiaSharp.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)Voxels.SkiaSharp.dll" />
 			</Component>
 			<Component Id="Voxels.dll" Guid="a0af3960-3b51-4402-a5c6-fed81d1e9b4b">
-			  <File Id="Voxels.dll" Name="Voxels.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)Voxels.dll" />
+			  <File Id="Voxels.dll" Name="Voxels.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)Voxels.dll" />
 			</Component>
 			<Component Id="SharpShell.dll" Guid="93680dd3-e026-4344-b983-75bab9446df5">
-			  <File Id="SharpShell.dll" Name="SharpShell.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)SharpShell.dll" />
+			  <File Id="SharpShell.dll" Name="SharpShell.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)SharpShell.dll" />
 			</Component>
 			<Component Id="SkiaSharp.dll" Guid="e9aebeae-5129-424a-adba-1d4617255c0a">
-			  <File Id="SkiaSharp.dll" Name="SkiaSharp.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)SkiaSharp.dll" />
+			  <File Id="SkiaSharp.dll" Name="SkiaSharp.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)SkiaSharp.dll" />
 			</Component>
       <Component Id="srm.exe" Guid="8AD977A7-89BA-4D9C-B7CB-0D595B6426EA">
-        <File Id="srm.exe" Source="$(var.Voxels.ShellExtensions_TargetDir)srm.exe" KeyPath="yes" />
+        <File Id="srm.exe" Source="$(var.Voxels.ShellExtensions.TargetDir)srm.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="Voxels.CommandLine.exe" Guid="{37E18973-EA93-418D-ADDD-88375E068191}">
+        <File Id="Voxels.CommandLine.exe" Source="$(var.Voxels.CommandLine.TargetDir)Voxels.CommandLine.exe" KeyPath="yes" />
       </Component>
     </ComponentGroup>
 	</Fragment>
@@ -58,7 +61,7 @@
   <Fragment>
     <ComponentGroup Id="ProductComponentsx86" Directory="INSTALLFOLDERx86">
       <Component Id="x86_libSkiaSharp.dll" Guid="6B6B3855-966E-4926-8D1D-1030C70F400D">
-        <File Id="x86_libSkiaSharp.dll" Name="libSkiaSharp.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)\x86\libSkiaSharp.dll" />
+        <File Id="x86_libSkiaSharp.dll" Name="libSkiaSharp.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)x86\libSkiaSharp.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>
@@ -66,7 +69,7 @@
   <Fragment>
     <ComponentGroup Id="ProductComponentsx64" Directory="INSTALLFOLDERx64">
       <Component Id="x64_libSkiaSharp.dll" Guid="442D691A-9508-4FDF-9EE6-3B3A59595F10">
-        <File Id="x64_libSkiaSharp.dll" Name="libSkiaSharp.dll" Source="$(var.Voxels.ShellExtensions_TargetDir)\x64\libSkiaSharp.dll" />
+        <File Id="x64_libSkiaSharp.dll" Name="libSkiaSharp.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)x64\libSkiaSharp.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

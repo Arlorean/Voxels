@@ -30,3 +30,8 @@
 /Voxels.SkiaSharp/obj
 /Voxels.Test/bin/Release
 /Voxels.Test/obj/Release
+/Voxels.CommandLine/bin.old
+/Voxels.Setup/bin/Release
+/Voxels.Setup/obj/Release
+*.user
+/Voxels.Setup/Voxels.Setup.wixproj.user

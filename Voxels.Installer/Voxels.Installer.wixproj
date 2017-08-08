@@ -23,6 +23,14 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Voxels.CommandLine\Voxels.CommandLine.csproj">
+      <Name>Voxels.CommandLine</Name>
+      <Project>{1e4d9af1-41e1-4c81-9d9a-ef22f101e69f}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\Voxels.ShellExtensions\Voxels.ShellExtensions.csproj">
       <Name>Voxels.ShellExtensions</Name>
       <Project>{f8a32354-da2b-406c-aebe-dcefd85fd033}</Project>

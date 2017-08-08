@@ -25,5 +25,9 @@ namespace Voxels.ShellExtensions {
             bitmap.UnlockBits(bitmapData);
             return bitmap;
         }
+
+        static ThumbnailHandlerVox() {
+            NativeLibrary.Initialize();
+        }
     }
 }

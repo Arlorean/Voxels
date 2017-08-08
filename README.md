@@ -43,7 +43,7 @@ PNG             |  SVG
 1. [SharpShellTools](https://github.com/dwmkerr/sharpshell) - Dave Kerr's ShellExtensions Tools for .NET
 1. [WiX Toolset](http://wixtoolset.org/) - ~~Simple~~ XML based windows installer scripting
 1. [Ambient Occlusion](https://0fps.net/2013/07/03/ambient-occlusion-for-minecraft-like-worlds/) algorithm by [Mikola Lysenko](https://github.com/mikolalysenko).
-1. [Wix VC++ 2015 Setup](https://gist.github.com/nathancorvussolis/6852ba282647aeb0c5c00e742e28eb48) gist for 
+1. [Wix VC++ 2015 Setup](https://gist.github.com/nathancorvussolis/6852ba282647aeb0c5c00e742e28eb48) gist for installing VC++ 2015 dlls.
 
 The 3x3x3.vox, 8x8x8.vox files are directly from the [MagicaVoxel](https://ephtracy.github.io/) distribution for authentic testing.
 

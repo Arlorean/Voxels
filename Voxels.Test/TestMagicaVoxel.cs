@@ -1,11 +1,16 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.IO;
 
 namespace Voxels.Test {
-    [TestClass]
+    [TestFixture]
     public class TestMagicaVoxel {
-        [TestMethod]
+        [OneTimeSetUp]
+        public void SetUp() {
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory);
+        }
+
+        [Test]
         public void Test1x2x3() {
             using (var stream = File.OpenRead("1x2x3.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);
@@ -16,7 +21,7 @@ namespace Voxels.Test {
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Test3x3x3() {
             using (var stream = File.OpenRead("3x3x3.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);
@@ -24,7 +29,7 @@ namespace Voxels.Test {
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Test8x8x8() {
             using (var stream = File.OpenRead("8x8x8.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);

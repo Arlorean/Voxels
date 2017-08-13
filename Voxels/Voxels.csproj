@@ -51,6 +51,7 @@
     <Compile Include="AmbientOcclusion.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="MagicaVoxel.cs" />
+    <Compile Include="MeshBuilder.cs" />
     <Compile Include="XYZ.cs" />
     <Compile Include="Voxel.cs" />
     <Compile Include="VoxelData.cs" />

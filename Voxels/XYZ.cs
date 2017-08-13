@@ -55,6 +55,31 @@ namespace Voxels {
             return new XYZ(-a.X, -a.Y, -a.Z);
         }
 
+        public XYZ[] GetAdjacent() {
+            var adjacent = new XYZ[4];
+            XYZ d0;
+            XYZ d1;
+            if (X != 0) {
+                d0 = XYZ.OneY;
+                d1 = XYZ.OneZ;
+            }
+            else 
+            if (Y != 0) {
+                d0 = XYZ.OneZ;
+                d1 = XYZ.OneX;
+
+            }
+            else {
+                d0 = XYZ.OneX;
+                d1 = XYZ.OneY;
+            }
+            adjacent[0] = d0;
+            adjacent[1] = d1;
+            adjacent[2] = -d0;
+            adjacent[3] = -d1;
+            return adjacent;
+        }
+
         public bool Equals(XYZ other) {
             return this.X == other.X
                 && this.Y == other.Y

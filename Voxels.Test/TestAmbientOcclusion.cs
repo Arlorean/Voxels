@@ -1,12 +1,16 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.IO;
 
 namespace Voxels.Test {
-    [TestClass]
+    [TestFixture]
     public class TestAmbientOcclusion {
+        [OneTimeSetUp]
+        public void SetUp() {
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory);
+        }
 
-        [TestMethod]
+        [Test]
         public void TestCase0() {
             using (var stream = File.OpenRead("3x3x3.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);
@@ -14,7 +18,7 @@ namespace Voxels.Test {
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestCase1() {
             using (var stream = File.OpenRead("3x3x3.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);
@@ -22,21 +26,21 @@ namespace Voxels.Test {
                 Assert.AreEqual(1, AmbientOcclusion.CalculateAO(voxelData, new XYZ(0, 1, 1), XYZ.OneY, XYZ.OneX, XYZ.OneZ));
             }
         }
-        [TestMethod]
+        [Test]
         public void TestCase2() {
             using (var stream = File.OpenRead("3x3x3.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);
                 Assert.AreEqual(2, AmbientOcclusion.CalculateAO(voxelData, new XYZ(1, 1, 0), XYZ.OneY, XYZ.OneX, XYZ.OneZ));
             }
         }
-        [TestMethod]
+        [Test]
         public void TestCase3() {
             using (var stream = File.OpenRead("3x3x3.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);
                 Assert.AreEqual(3, AmbientOcclusion.CalculateAO(voxelData, new XYZ(2, 2, 2), XYZ.OneY, XYZ.OneX, XYZ.OneZ));
             }
         }
-        [TestMethod]
+        [Test]
         public void TestCaseComplex() {
             using (var stream = File.OpenRead("2x2x2.vox")) {
                 var voxelData = MagicaVoxel.Read(stream);

@@ -69,13 +69,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Voxels.Core\Voxels.csproj">
+      <Project>{5f012250-ca19-4c6a-a3a0-7144dae5e8ae}</Project>
+      <Name>Voxels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Voxels.SkiaSharp\Voxels.SkiaSharp.csproj">
       <Project>{5275868a-6c22-469c-8c12-c039898e305c}</Project>
       <Name>Voxels.SkiaSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Voxels\Voxels.csproj">
-      <Project>{5f012250-ca19-4c6a-a3a0-7144dae5e8ae}</Project>
-      <Name>Voxels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

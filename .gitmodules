@@ -1,0 +1,3 @@
+[submodule "Voxels.Core"]
+	path = Voxels.Core
+	url = https://github.com/Arlorean/Voxels.Core.git

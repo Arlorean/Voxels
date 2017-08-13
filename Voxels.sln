@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels", "Voxels\Voxels.csproj", "{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels.CommandLine", "Voxels.CommandLine\Voxels.CommandLine.csproj", "{1E4D9AF1-41E1-4C81-9D9A-EF22F101E69F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE} = {5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}
@@ -27,6 +25,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Voxels.Setup", "Voxels.Setu
 		{4CE76915-E1EA-46AF-9C22-737F7B9B0C27} = {4CE76915-E1EA-46AF-9C22-737F7B9B0C27}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels", "..\Voxels.Core\Voxels.csproj", "{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,14 +35,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|x86.Build.0 = Debug|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|x86.ActiveCfg = Release|Any CPU
-		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|x86.Build.0 = Release|Any CPU
 		{1E4D9AF1-41E1-4C81-9D9A-EF22F101E69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E4D9AF1-41E1-4C81-9D9A-EF22F101E69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E4D9AF1-41E1-4C81-9D9A-EF22F101E69F}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -89,6 +81,14 @@ Global
 		{74833944-18A2-406D-AD28-63B36EB8795D}.Release|Any CPU.Build.0 = Release|x86
 		{74833944-18A2-406D-AD28-63B36EB8795D}.Release|x86.ActiveCfg = Release|x86
 		{74833944-18A2-406D-AD28-63B36EB8795D}.Release|x86.Build.0 = Release|x86
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Debug|x86.Build.0 = Debug|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

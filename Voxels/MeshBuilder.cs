@@ -64,8 +64,16 @@ namespace Voxels {
                 var i3 = (ushort)(n + 3);
                 normals.AddRange(new[] { faceUp, faceUp, faceUp, faceUp });
 
-                // Calculate quad vertices
-                var adjacent = faceUp.GetAdjacent();
+                // Calculate adjacent voxels
+                var adjacent = new XYZ[] { XYZ.Zero, XYZ.Zero, XYZ.Zero, XYZ.Zero };
+                if (faceUp == XYZ.OneX) { adjacent = new[] { XYZ.OneY, XYZ.OneZ, -XYZ.OneY, -XYZ.OneZ }; }
+                if (faceUp == XYZ.OneY) { adjacent = new[] { XYZ.OneZ, XYZ.OneX, -XYZ.OneZ, -XYZ.OneX }; }
+                if (faceUp == XYZ.OneZ) { adjacent = new[] { XYZ.OneX, XYZ.OneY, -XYZ.OneX, -XYZ.OneY }; }
+                if (faceUp == -XYZ.OneX) { adjacent = new[] { XYZ.OneZ, XYZ.OneY, -XYZ.OneZ, -XYZ.OneY }; }
+                if (faceUp == -XYZ.OneY) { adjacent = new[] { XYZ.OneX, XYZ.OneZ, -XYZ.OneX, -XYZ.OneZ }; }
+                if (faceUp == -XYZ.OneZ) { adjacent = new[] { XYZ.OneY, XYZ.OneX, -XYZ.OneY, -XYZ.OneX }; }
+
+                // Calculate quad vertices based on adjacent voxels
                 var v0 = p + (adjacent[0] + adjacent[1] + faceUp + XYZ.One) / 2;
                 var v1 = p + (adjacent[1] + adjacent[2] + faceUp + XYZ.One) / 2;
                 var v2 = p + (adjacent[2] + adjacent[3] + faceUp + XYZ.One) / 2;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Voxels
-{
+﻿namespace Voxels {
     public struct Voxel {
         public byte colorIndex;
 

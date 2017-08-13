@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Voxels
-{
+namespace Voxels {
     /// <summary>
     /// Represents a set of voxels in a fixed size grid.
     /// NOTE: XY is the horizontal plane and Z is the vertical axis.
@@ -42,7 +39,7 @@ namespace Voxels
                     voxels[p.X * (size.Y * size.Z) + p.Y * size.Z + p.Z] = value;
                 }
                 else {
-                    throw new ArgumentOutOfRangeException(nameof(p), p, "point not in voxel data set.");
+                    throw new ArgumentOutOfRangeException("p", p, "point not in voxel data set.");
                 }
             }
         }

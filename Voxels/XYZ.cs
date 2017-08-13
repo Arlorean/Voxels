@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Voxels {
     /// <summary>
@@ -95,7 +91,7 @@ namespace Voxels {
         }
 
         public override string ToString() {
-            return $"{X}|{Y}|{Z}";
+            return string.Format("{0}|{1}|{2}", X, Y, X);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -79,9 +80,18 @@ namespace Voxels.SkiaSharp {
                     .Select(v => matrix.MapScalars(v.X, v.Z, -v.Y, 1f))
                     .Select(v => new SKPoint(v[0], v[1]))
                     .ToArray();
-                var colors = triangles.Colors.Select(ToSKColor).ToArray();
+                var colors = triangles.Colors;
                 var indices = triangles.Faces;
-                canvas.DrawVertices(SKVertexMode.Triangles, vertices, null, colors, indices, fill);
+
+                // Render triangles in batches since SkiaSharp DrawVertices indices are 16 bit which fails for large files
+                var batchSize = 3*20000; // up to 20000 triangles per batch
+                for (var i = 0; i < indices.Length; i += batchSize) {
+                    var batch = Enumerable.Range(i, Math.Min(batchSize, indices.Length - i));
+                    var _vertices = batch.Select(j => vertices[indices[j]]).ToArray();
+                    var _colors = batch.Select(j => colors[indices[j]]).Select(ToSKColor).ToArray();
+                    var _indices = batch.Select(j => (ushort)(j-i)).ToArray();
+                    canvas.DrawVertices(SKVertexMode.Triangles, _vertices, null, _colors, _indices, fill);
+                }
             }
         }
 

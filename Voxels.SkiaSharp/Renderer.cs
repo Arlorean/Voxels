@@ -12,6 +12,7 @@ namespace Voxels.SkiaSharp {
                     AmbientOcclusion = true,
                     FrontFacesOnly = true,
                     FakeLighting = true,
+                    FloorShadow = true,
                     MeshType = MeshType.Triangles,
                 });
             }

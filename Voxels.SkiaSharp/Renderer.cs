@@ -10,6 +10,7 @@ namespace Voxels.SkiaSharp {
                 RenderTriangles(voxelData, size, canvas, new MeshSettings {
                     AmbientOcclusion = true,
                     FrontFacesOnly = true,
+                    FakeLighting = true,
                     MeshType = MeshType.Triangles,
                 });
             }
@@ -44,6 +45,7 @@ namespace Voxels.SkiaSharp {
                         RenderQuads(voxelData, size, canvas, new MeshSettings {
                             AmbientOcclusion = false,
                             FrontFacesOnly = true,
+                            FakeLighting = true,
                             MeshType = MeshType.Quads,
                         });
                     }

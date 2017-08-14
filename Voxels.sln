@@ -25,7 +25,7 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Voxels.Setup", "Voxels.Setu
 		{4CE76915-E1EA-46AF-9C22-737F7B9B0C27} = {4CE76915-E1EA-46AF-9C22-737F7B9B0C27}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels", "Voxels.Core\Voxels.csproj", "{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels.Core", "Voxels.Core\Voxels.Core.csproj", "{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

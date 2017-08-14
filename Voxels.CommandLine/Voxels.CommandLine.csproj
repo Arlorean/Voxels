@@ -69,7 +69,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Voxels.Core\Voxels.csproj">
+    <ProjectReference Include="..\Voxels.Core\Voxels.Core.csproj">
       <Project>{5f012250-ca19-4c6a-a3a0-7144dae5e8ae}</Project>
       <Name>Voxels</Name>
     </ProjectReference>

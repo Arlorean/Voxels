@@ -9,8 +9,7 @@ namespace Voxels.SkiaSharp {
             using (var canvas = new SKCanvas(bitmap)) {
                 bitmap.Erase(SKColors.Transparent);
                 RenderTriangles(voxelData, size, canvas, new MeshSettings {
-                    AmbientOcclusion = true,
-                    FrontFacesOnly = true,
+                    FrontFaces = true,
                     FakeLighting = true,
                     FloorShadow = true,
                     MeshType = MeshType.Triangles,
@@ -45,8 +44,7 @@ namespace Voxels.SkiaSharp {
                 using (var writer = new SKXmlStreamWriter(skStream)) {
                     using (var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, size, size), writer)) {
                         RenderQuads(voxelData, size, canvas, new MeshSettings {
-                            AmbientOcclusion = false,
-                            FrontFacesOnly = true,
+                            FrontFaces = true,
                             FakeLighting = true,
                             MeshType = MeshType.Quads,
                         });
@@ -82,6 +80,7 @@ namespace Voxels.SkiaSharp {
                     .Select(v => new SKPoint(v[0], v[1]))
                     .ToArray();
                 var colors = triangles.Colors;
+                var occlusion = triangles.Occlusion;
                 var indices = triangles.Faces;
 
                 // Render triangles in batches since SkiaSharp DrawVertices indices are 16 bit which fails for large files
@@ -89,7 +88,7 @@ namespace Voxels.SkiaSharp {
                 for (var i = 0; i < indices.Length; i += batchSize) {
                     var batch = Enumerable.Range(i, Math.Min(batchSize, indices.Length - i));
                     var _vertices = batch.Select(j => vertices[indices[j]]).ToArray();
-                    var _colors = batch.Select(j => colors[indices[j]]).Select(ToSKColor).ToArray();
+                    var _colors = batch.Select(j => AmbientOcclusion.CombineColorOcclusion(colors[indices[j]], occlusion[indices[j]])).Select(ToSKColor).ToArray();
                     var _indices = batch.Select(j => (ushort)(j-i)).ToArray();
                     canvas.DrawVertices(SKVertexMode.Triangles, _vertices, null, _colors, _indices, fill);
                 }

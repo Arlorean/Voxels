@@ -15,7 +15,7 @@ namespace Voxels.CommandLine {
                     using (var stream = File.OpenRead(filename)) {
                         var voxelData = MagicaVoxel.Read(stream);
 
-                        File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(1024, voxelData));
+                        File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(512, voxelData));
                         File.WriteAllBytes(Path.ChangeExtension(filename, ".svg"), Renderer.RenderSvg(512, voxelData));
                     }
                 }

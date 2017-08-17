@@ -14,7 +14,10 @@ namespace Voxels.ShellExtensions {
     public class ThumbnailHandlerVox : SharpThumbnailHandler {
         protected override Bitmap GetThumbnailImage(uint width) {
             var size = (int)width;
-            var voxelData = MagicaVoxel.Read(SelectedItemStream);
+            var voxelData = VoxFile.Read(SelectedItemStream);
+            if (voxelData == null) {
+                return null;
+            }
             var bitmapBytes = Renderer.RenderBitmap((int)size, voxelData);
 
             // Convert Skia bytes to GDI Bitmap

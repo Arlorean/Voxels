@@ -12,12 +12,10 @@ namespace Voxels.CommandLine {
                 NativeLibrary.Initialize();
 
                 foreach (var filename in args) {
-                    using (var stream = File.OpenRead(filename)) {
-                        var voxelData = VoxFile.Read(stream);
+                    var voxelData = VoxelImport.Import(filename);
 
-                        File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(2048, voxelData));
-                        File.WriteAllBytes(Path.ChangeExtension(filename, ".svg"), Renderer.RenderSvg(512, voxelData));
-                    }
+                    File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(512, voxelData));
+                    File.WriteAllBytes(Path.ChangeExtension(filename, ".svg"), Renderer.RenderSvg(512, voxelData));
                 }
             }
         }

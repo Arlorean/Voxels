@@ -1,6 +1,6 @@
 # MagicaVoxel Windows Explorer Thumbnails
 
-The [Voxels.Setup.exe](https://github.com/Arlorean/Voxels/releases/download/v1.1/Voxels.Setup.exe) provides Windows Explorer Thumbnails for [MagicaVoxel](https://ephtracy.github.io/) [.vox files](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt):
+The [Voxels.Setup.exe](https://github.com/Arlorean/Voxels/releases/latest) provides Windows Explorer Thumbnails for [MagicaVoxel](https://ephtracy.github.io/) [.vox files](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt):
 
 ![Windows Explorer Thumbnails](Voxels.Website/WindowsExplorer.png)
 

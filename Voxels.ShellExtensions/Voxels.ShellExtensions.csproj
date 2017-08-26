@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ThumbnailHandlerQbcl.cs" />
+    <Compile Include="ThumbnailHandlerQb.cs" />
     <Compile Include="ThumbnailHandlerVox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

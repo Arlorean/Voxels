@@ -4,10 +4,12 @@ The [Voxels.Setup.exe](https://github.com/Arlorean/Voxels/releases/latest) provi
 - [MagicaVoxel](https://ephtracy.github.io/) [**.vox** files](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt)
 - [Voxlap Engine](http://advsys.net/ken/voxlap.htm) [**.vox** files](http://advsys.net/ken/build.htm)
 - [Qubicle](http://minddesk.com) [**.qbcl** project files](http://minddesk.com/learn/article.php?id=100)
-- [Qubicle](http://minddesk.com) [**.qb** binary files](http://minddesk.com/learn/article.php?id=22).
+- [Qubicle](http://minddesk.com) [**.qb** binary files](http://minddesk.com/learn/article.php?id=22)
 
+Here are the MagicaVoxel sample file thumbnails:
 ![Windows Explorer Thumbnails](Voxels.Website/WindowsExplorer.png)
 
+Here are some of [Mike Judge's mmmm](https://mikelovesrobots.github.io/mmmm/) collections file thumbnails:
 ![mmmm Thumbnails](Voxels.Website/mmmm.png)
 
 The library uses [SkiaSharp](https://github.com/mono/SkiaSharp#using-skiasharp) which requires [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145) to be installed. The exe setup does this for you.

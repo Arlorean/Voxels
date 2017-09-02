@@ -12,6 +12,9 @@ Here are the MagicaVoxel sample file thumbnails:
 Here are some of [Mike Judge's mmmm](https://mikelovesrobots.github.io/mmmm/) collections file thumbnails:
 ![mmmm Thumbnails](Voxels.Website/mmmm.png)
 
+Special thanks to Voxel Artist [Zachary Soares](https://www.zsinked.com/) for a screenshot of his [Qubicle](http://minddesk.com) project file thumnails:
+![ZacharySoares Thumbnails](Voxels.Website/ZacharySoares.png)
+
 The library uses [SkiaSharp](https://github.com/mono/SkiaSharp#using-skiasharp) which requires [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145) to be installed. The exe setup does this for you.
 
 # PNG and SVG output

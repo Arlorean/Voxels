@@ -4,4 +4,4 @@
 
 [submodule "NGif.SkiaSharp"]
 	path = NGif.SkiaSharp
-	url = https://github.com/Arlorean/NGif.SkiaSharp.git
+	url = https://github.com/Arlorean/NGif.SkiaSharp

@@ -1,7 +1,9 @@
 [submodule "Voxels.Core"]
 	path = Voxels.Core
 	url = https://github.com/Arlorean/Voxels.Core.git
+	update = merge
 
 [submodule "NGif.SkiaSharp"]
 	path = NGif.SkiaSharp
 	url = https://github.com/Arlorean/NGif.SkiaSharp
+	update = merge

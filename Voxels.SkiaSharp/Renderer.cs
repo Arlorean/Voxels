@@ -4,29 +4,38 @@ using System.IO;
 using System.Linq;
 
 namespace Voxels.SkiaSharp {
-    public class Renderer {
-        static void RenderIntoBitmap(int size, VoxelData voxelData, SKBitmap bitmap) {
+    public class RenderSettings {
+        public int size = 512;
+        public float rotationX = 26f;
+        public float rotationY = 45f;
+        public float rotationZ = 0f;
+    }
+
+    public static class Renderer {
+        static void RenderIntoBitmap(int size, VoxelData voxelData, SKBitmap bitmap, RenderSettings renderSettings) {
             using (var canvas = new SKCanvas(bitmap)) {
                 bitmap.Erase(SKColors.Transparent);
-                RenderTriangles(voxelData, size, canvas, new MeshSettings {
-                    FrontFaces = true,
+                RenderTriangles(voxelData, canvas, new MeshSettings {
+                    Rotation = renderSettings.rotationY,
                     FakeLighting = true,
                     FloorShadow = true,
                     MeshType = MeshType.Triangles,
-                });
+                }, renderSettings);
             }
         }
 
-        public static byte[] RenderBitmap(int size, VoxelData voxelData) {
+        public static byte[] RenderBitmap(VoxelData voxelData, RenderSettings renderSettings) {
+            var size = renderSettings.size;
             using (var bitmap = new SKBitmap(size, size, false)) {
-                RenderIntoBitmap(size, voxelData, bitmap);
+                RenderIntoBitmap(size, voxelData, bitmap, renderSettings);
                 return bitmap.Bytes;
             }
         }
 
-        public static byte[] RenderPng(int size, VoxelData voxelData) {
+        public static byte[] RenderPng(VoxelData voxelData, RenderSettings renderSettings) {
+            var size = renderSettings.size;
             using (var bitmap = new SKBitmap(size, size, false)) {
-                RenderIntoBitmap(size, voxelData, bitmap);
+                RenderIntoBitmap(size, voxelData, bitmap, renderSettings);
 
                 using (var image = SKImage.FromBitmap(bitmap)) {
                     using (var data = image.Encode()) {
@@ -38,28 +47,31 @@ namespace Voxels.SkiaSharp {
             }
         }
 
-        public static byte[] RenderSvg(int size, VoxelData voxelData) {
+        public static byte[] RenderSvg(VoxelData voxelData, RenderSettings renderSettings) {
+            var size = renderSettings.size;
             var ms = new MemoryStream();
             using (var skStream = new SKManagedWStream(ms)) {
                 using (var writer = new SKXmlStreamWriter(skStream)) {
                     using (var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, size, size), writer)) {
                         RenderQuads(voxelData, size, canvas, new MeshSettings {
-                            FrontFaces = true,
+                            Rotation = renderSettings.rotationY,
                             FakeLighting = true,
                             MeshType = MeshType.Quads,
-                        });
+                        }, renderSettings);
                     }
                 }
             }
             return ms.ToArray();
         }
 
-        static SKMatrix44 GetMatrix(VoxelData voxelData, int size) {
+        static SKMatrix44 GetMatrix(VoxelData voxelData, RenderSettings renderSettings) {
+            var s = renderSettings.size;
             var r = 1.61803398875f;
-            var d = size / (r*voxelData.size.MaxDimension);
-            var tran = SKMatrix44.CreateTranslate(size*0.5f, size*0.5f, 0);
-            var rotx = SKMatrix44.CreateRotationDegrees(1, 0, 0, -26f);
-            var roty = SKMatrix44.CreateRotationDegrees(0, 1, 0, 45);
+            var d = s / (r*voxelData.size.MaxDimension);
+            var tran = SKMatrix44.CreateTranslate(s*0.5f, s*0.5f, 0);
+            var rotx = SKMatrix44.CreateRotationDegrees(1, 0, 0, renderSettings.rotationX);
+            var roty = SKMatrix44.CreateRotationDegrees(0, 1, 0, renderSettings.rotationY);
+            var rotz = SKMatrix44.CreateRotationDegrees(0, 0, 1, renderSettings.rotationZ);
             var matrix = SKMatrix44.CreateIdentity();
             matrix.PreConcat(tran);
             matrix.PreConcat(rotx);
@@ -69,12 +81,12 @@ namespace Voxels.SkiaSharp {
             return matrix;
         }
 
-        static void RenderTriangles(VoxelData voxelData, int size, SKCanvas canvas, MeshSettings settings) {
-            var matrix = GetMatrix(voxelData, size);
+        static void RenderTriangles(VoxelData voxelData, SKCanvas canvas, MeshSettings settings, RenderSettings renderSettings) {
+            var matrix = GetMatrix(voxelData, renderSettings);
             settings.MeshType = MeshType.Triangles;
             var triangles = new MeshBuilder(voxelData, settings);
 
-            using (var fill = new SKPaint()) {
+            using (var fill = new SKPaint() { IsAntialias = true, FilterQuality = SKFilterQuality.High }) {
                 var vertices = triangles.Vertices
                     .Select(v => matrix.MapScalars(v.X, v.Z, -v.Y, 1f))
                     .Select(v => new SKPoint(v[0], v[1]))
@@ -95,10 +107,10 @@ namespace Voxels.SkiaSharp {
             }
         }
 
-        static void RenderQuads(VoxelData voxelData, int size, SKCanvas canvas, MeshSettings settings) {
-            var matrix = GetMatrix(voxelData, size);
-            settings.MeshType = MeshType.Quads;
-            var quads = new MeshBuilder(voxelData, settings);
+        static void RenderQuads(VoxelData voxelData, int size, SKCanvas canvas, MeshSettings meshSettings, RenderSettings renderSettings) {
+            var matrix = GetMatrix(voxelData, renderSettings);
+            meshSettings.MeshType = MeshType.Quads;
+            var quads = new MeshBuilder(voxelData, meshSettings);
 
             var vertices = quads.Vertices
                 .Select(v => matrix.MapScalars(v.X, v.Z, -v.Y, 1f))
@@ -113,7 +125,11 @@ namespace Voxels.SkiaSharp {
                     path.AddPoly(quad, close: true);
 
                     var color = quads.Colors[quads.Faces[i]]; // Take 1st vertex color for face
-                    using (var fill = new SKPaint() { Color = ToSKColor(color) }) {
+                    using (var fill = new SKPaint() {
+                        Color = ToSKColor(color),
+                        Style=SKPaintStyle.StrokeAndFill,
+                        StrokeJoin=SKStrokeJoin.Round,
+                    }) {
                         canvas.DrawPath(path, fill);
                     }
                 }

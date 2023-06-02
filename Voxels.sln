@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels.CommandLine", "Voxels.CommandLine\Voxels.CommandLine.csproj", "{1E4D9AF1-41E1-4C81-9D9A-EF22F101E69F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -26,6 +26,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Voxels.Setup", "Voxels.Setu
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxels.Core", "Voxels.Core\Voxels.Core.csproj", "{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGif.SkiaSharp", "NGif.SkiaSharp\NGif.SkiaSharp\NGif.SkiaSharp.csproj", "{F83EE85A-F1AA-49CA-9123-C009CDA79D21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,8 +91,19 @@ Global
 		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|x86.ActiveCfg = Release|Any CPU
 		{5F012250-CA19-4C6A-A3A0-7144DAE5E8AE}.Release|x86.Build.0 = Release|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Debug|x86.Build.0 = Debug|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Release|x86.ActiveCfg = Release|Any CPU
+		{F83EE85A-F1AA-49CA-9123-C009CDA79D21}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2EDB07E-8C5E-4BD4-994C-98B6465A3D0D}
 	EndGlobalSection
 EndGlobal

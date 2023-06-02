@@ -18,7 +18,9 @@ namespace Voxels.ShellExtensions {
             if (voxelData == null) {
                 return null;
             }
-            var bitmapBytes = Renderer.RenderBitmap((int)size, voxelData);
+
+            var renderSettings = new RenderSettings() { size = size };
+            var bitmapBytes = Renderer.RenderBitmap(voxelData, renderSettings);
 
             // Convert Skia bytes to GDI Bitmap
             var format = PixelFormat.Format32bppArgb;

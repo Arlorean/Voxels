@@ -21,7 +21,7 @@ namespace Voxels.CommandLine {
                         if (p.Alpha != 0) {
                             var c = new Color(p.Red, p.Green, p.Blue, p.Alpha);
                             var i = Array.IndexOf(palette, c);
-                            voxelData[new XYZ(x, 0, y)] = new Voxel((uint)i);
+                            voxelData[new XYZ(x, 0, bitmap.Height-y-1)] = new Voxel((uint)i);
                         }
                     }
                 }

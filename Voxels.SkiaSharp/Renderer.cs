@@ -5,18 +5,18 @@ using System.Linq;
 
 namespace Voxels.SkiaSharp {
     public class RenderSettings {
-        public int size = 512;
-        public float rotationX = 26f;
-        public float rotationY = 45f;
-        public float rotationZ = 0f;
+        public int Size = 512;
+        public float Pitch = -26f;
+        public float Yaw = 45f;
     }
 
     public static class Renderer {
-        static void RenderIntoBitmap(int size, VoxelData voxelData, SKBitmap bitmap, RenderSettings renderSettings) {
+        static void RenderIntoBitmap(VoxelData voxelData, SKBitmap bitmap, RenderSettings renderSettings) {
             using (var canvas = new SKCanvas(bitmap)) {
                 bitmap.Erase(SKColors.Transparent);
                 RenderTriangles(voxelData, canvas, new MeshSettings {
-                    Rotation = renderSettings.rotationY,
+                    Yaw = renderSettings.Yaw,
+                    Pitch = renderSettings.Pitch,
                     FakeLighting = true,
                     FloorShadow = true,
                     MeshType = MeshType.Triangles,
@@ -25,17 +25,17 @@ namespace Voxels.SkiaSharp {
         }
 
         public static byte[] RenderBitmap(VoxelData voxelData, RenderSettings renderSettings) {
-            var size = renderSettings.size;
+            var size = renderSettings.Size;
             using (var bitmap = new SKBitmap(size, size, false)) {
-                RenderIntoBitmap(size, voxelData, bitmap, renderSettings);
+                RenderIntoBitmap(voxelData, bitmap, renderSettings);
                 return bitmap.Bytes;
             }
         }
 
         public static byte[] RenderPng(VoxelData voxelData, RenderSettings renderSettings) {
-            var size = renderSettings.size;
+            var size = renderSettings.Size;
             using (var bitmap = new SKBitmap(size, size, false)) {
-                RenderIntoBitmap(size, voxelData, bitmap, renderSettings);
+                RenderIntoBitmap(voxelData, bitmap, renderSettings);
 
                 using (var image = SKImage.FromBitmap(bitmap)) {
                     using (var data = image.Encode()) {
@@ -48,13 +48,14 @@ namespace Voxels.SkiaSharp {
         }
 
         public static byte[] RenderSvg(VoxelData voxelData, RenderSettings renderSettings) {
-            var size = renderSettings.size;
+            var size = renderSettings.Size;
             var ms = new MemoryStream();
             using (var skStream = new SKManagedWStream(ms)) {
                 using (var writer = new SKXmlStreamWriter(skStream)) {
                     using (var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, size, size), writer)) {
                         RenderQuads(voxelData, size, canvas, new MeshSettings {
-                            Rotation = renderSettings.rotationY,
+                            Yaw = renderSettings.Yaw,
+                            Pitch = renderSettings.Pitch,
                             FakeLighting = true,
                             MeshType = MeshType.Quads,
                         }, renderSettings);
@@ -65,13 +66,12 @@ namespace Voxels.SkiaSharp {
         }
 
         static SKMatrix44 GetMatrix(VoxelData voxelData, RenderSettings renderSettings) {
-            var s = renderSettings.size;
+            var s = renderSettings.Size;
             var r = 1.61803398875f;
             var d = s / (r*voxelData.size.MaxDimension);
             var tran = SKMatrix44.CreateTranslate(s*0.5f, s*0.5f, 0);
-            var rotx = SKMatrix44.CreateRotationDegrees(1, 0, 0, renderSettings.rotationX);
-            var roty = SKMatrix44.CreateRotationDegrees(0, 1, 0, renderSettings.rotationY);
-            var rotz = SKMatrix44.CreateRotationDegrees(0, 0, 1, renderSettings.rotationZ);
+            var rotx = SKMatrix44.CreateRotationDegrees(1, 0, 0, renderSettings.Pitch);
+            var roty = SKMatrix44.CreateRotationDegrees(0, 1, 0, renderSettings.Yaw);
             var matrix = SKMatrix44.CreateIdentity();
             matrix.PreConcat(tran);
             matrix.PreConcat(rotx);

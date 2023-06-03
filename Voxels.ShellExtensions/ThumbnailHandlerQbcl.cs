@@ -1,12 +1,9 @@
-﻿using System.Drawing;
-using SharpShell.Attributes;
+﻿using SharpShell.Attributes;
 using SharpShell.SharpThumbnailHandler;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using Voxels.SkiaSharp;
-using System.Drawing.Imaging;
-using System.IO;
-using System;
-using System.Reflection;
 
 namespace Voxels.ShellExtensions {
     [ComVisible(true)]

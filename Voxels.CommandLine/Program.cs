@@ -1,9 +1,8 @@
-﻿using System.IO;
+﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using Voxels.SkiaSharp;
 using McMaster.Extensions.CommandLineUtils;
-using System.ComponentModel.DataAnnotations;
 using System;
-using System.ComponentModel;
 
 namespace Voxels.CommandLine {
     class Program {
@@ -12,10 +11,10 @@ namespace Voxels.CommandLine {
         public int Size { get; set; } = 512;
 
         [Option(ShortName = "y", Description = "The yaw in degrees.")]
-        public float Yaw { get; set; } = 135f;
+        public float Yaw { get; set; } = 45f;
 
         [Option(ShortName = "x", Description = "The pitch in degrees.")]
-        public float Pitch { get; set; } = 26f;
+        public float Pitch { get; set; } = -26f;
 
         [Option(Description = "Output a PNG file.")]
         public bool PNG { get; set; }
@@ -25,6 +24,9 @@ namespace Voxels.CommandLine {
 
         [Option(Description = "Output an animated GIF file.")]
         public bool GIF { get; set; }
+
+        [Option(Description = "Convert PNG file to VOX.")]
+        public bool VOX { get; set; }
 
         [Option(ShortName = "n", Description = "The number of frames for the animated GIF.")]
         public int RotationFrames { get; set; } = 36;
@@ -39,39 +41,64 @@ namespace Voxels.CommandLine {
             => CommandLineApplication.Execute<Program>(args);
 
         void OnExecute() {
-            // If none of PNG, SVG or GIF is specified, output PNG and SVG
-            if (!PNG && !SVG && !GIF) {
-                PNG = SVG = true;
-            }
-
             // Initialize SkiaSharp
             NativeLibrary.Initialize();
 
-            var renderSettings = new RenderSettings() {
-                size = Size,
-                rotationX = Math.Abs(Pitch), // Don't allow negative Pitch
-                rotationY = Yaw,
-            };
-            ConvertFiles(Filenames, renderSettings);
+            if (VOX) {
+                ConvertFiles(Filenames);
+            }
+            else {
+                // If none of PNG, SVG or GIF is specified, output PNG and SVG (previous default)
+                if (!PNG && !SVG && !GIF) {
+                    PNG = SVG = true;
+                }
+
+                var renderSettings = new RenderSettings() {
+                    Size = Size,
+                    Pitch = Pitch,
+                    Yaw = Yaw,
+                };
+                RenderFiles(Filenames, renderSettings);
+            }
         }
 
-        void ConvertFiles(string[] filenames, RenderSettings renderSettings) {
+        void RenderFiles(string[] filenames, RenderSettings renderSettings) {
             foreach (var filename in filenames) {
                 // Convert all files in directories
                 if (Directory.Exists(filename)) {
                     var directoryFilenames = Directory.GetFiles(filename);
-                    ConvertFiles(directoryFilenames, renderSettings);
+                    RenderFiles(directoryFilenames, renderSettings);
                 }
                 else {
                     var voxelData = VoxelImport.Import(filename);
-                    if (PNG) {
-                        File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(voxelData, renderSettings));
+                    if (voxelData != null) {
+                        if (PNG) {
+                            File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(voxelData, renderSettings));
+                        }
+                        if (SVG) {
+                            File.WriteAllBytes(Path.ChangeExtension(filename, ".svg"), Renderer.RenderSvg(voxelData, renderSettings));
+                        }
+                        if (GIF) {
+                            File.WriteAllBytes(Path.ChangeExtension(filename, ".gif"), Animation.RenderGif(voxelData, renderSettings, RotationFrames, RotationDuration));
+                        }
                     }
-                    if (SVG) {
-                        File.WriteAllBytes(Path.ChangeExtension(filename, ".svg"), Renderer.RenderSvg(voxelData, renderSettings));
-                    }
-                    if (GIF) {
-                        File.WriteAllBytes(Path.ChangeExtension(filename, ".gif"), Animation.RenderGif(voxelData, renderSettings, RotationFrames, RotationDuration));
+                }
+            }
+        }
+
+        void ConvertFiles(string[] filenames) {
+            foreach (var filename in filenames) {
+                // Convert all files in directories
+                if (Directory.Exists(filename)) {
+                    var directoryFilenames = Directory.GetFiles(filename);
+                    ConvertFiles(directoryFilenames);
+                }
+                else {
+                    var voxelData = ImageToVoxel.Import(filename);
+                    if (voxelData != null) {
+                        using (var stream = File.Create(Path.ChangeExtension(filename, ".vox"))) {
+                            MagicaVoxel.Write(stream, voxelData);
+                        }
                     }
                 }
             }

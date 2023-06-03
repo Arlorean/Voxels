@@ -16,16 +16,16 @@ namespace Voxels.CommandLine {
             encoder.SetRepeat(0);
             encoder.SetTransparent(SKColors.Black);
 
-            var startAngle = renderSettings.rotationY;
+            var startAngle = renderSettings.Yaw;
             var stepAngle = 360 / frames;
             for (var i=0; i < frames; i++) {
-                renderSettings.rotationY = startAngle - stepAngle * i; // Rotate clockwise
+                renderSettings.Yaw = startAngle + stepAngle * i;
 
                 var bytes = Renderer.RenderPng(voxelData, renderSettings);
                 var image = SKImage.FromBitmap(SKBitmap.Decode(bytes));
                 encoder.AddFrame(image);
             }
-            renderSettings.rotationY = startAngle;
+            renderSettings.Yaw = startAngle;
 
             encoder.Finish();
 

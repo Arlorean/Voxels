@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Arlorean")]
 [assembly: AssemblyProduct("Voxels.ShellExtensions")]
-[assembly: AssemblyCopyright("Copyright © Adam Davidson 2017")]
+[assembly: AssemblyCopyright("Copyright © Adam Davidson 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

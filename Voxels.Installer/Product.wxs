@@ -50,10 +50,16 @@
 			  <File Id="SkiaSharp.dll" Name="SkiaSharp.dll" Source="$(var.Voxels.ShellExtensions.TargetDir)SkiaSharp.dll" />
 			</Component>
       <Component Id="srm.exe" Guid="8AD977A7-89BA-4D9C-B7CB-0D595B6426EA">
-        <File Id="srm.exe" Source="$(var.Voxels.ShellExtensions.TargetDir)srm.exe" KeyPath="yes" />
+        <File Id="srm.exe" Source="$(var.Voxels.ShellExtensions.TargetDir)srm.exe" />
       </Component>
       <Component Id="Voxels.CommandLine.exe" Guid="{37E18973-EA93-418D-ADDD-88375E068191}">
         <File Id="Voxels.CommandLine.exe" Source="$(var.Voxels.CommandLine.TargetDir)Voxels.CommandLine.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="NGif.SkiaSharp.dll" Guid="{50280A29-EE38-44F8-97CD-8DBD4A8D41BC}">
+        <File Id="NGif.SkiaSharp.dll" Source="$(var.Voxels.CommandLine.TargetDir)NGif.SkiaSharp.dll" />
+      </Component>
+      <Component Id="McMaster.Extensions.CommandLineUtils.dll" Guid="{591B3219-BB53-4397-99FA-36E2E23109F0}">
+        <File Id="McMaster.Extensions.CommandLineUtils.dll" Source="$(var.Voxels.CommandLine.TargetDir)McMaster.Extensions.CommandLineUtils.dll" />
       </Component>
     </ComponentGroup>
 	</Fragment>

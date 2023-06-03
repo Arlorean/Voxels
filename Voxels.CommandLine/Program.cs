@@ -3,6 +3,8 @@ using System.IO;
 using Voxels.SkiaSharp;
 using McMaster.Extensions.CommandLineUtils;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Voxels.CommandLine {
     class Program {
@@ -45,7 +47,16 @@ namespace Voxels.CommandLine {
             NativeLibrary.Initialize();
 
             if (VOX) {
-                ConvertFiles(Filenames);
+                var colorsUsed = new HashSet<Color>() { Color.Transparent };
+                ExtractColors(Filenames, colorsUsed);
+
+                var palette = colorsUsed.ToArray();
+                if (palette.Length > 255) {
+                    Console.WriteLine($"Warning: More than 255 unique colors exist in the image(s) - truncating palette from {palette.Length} to 256 colors.");
+                }
+                Array.Resize(ref palette, 256); // Ensure array is exactly 256 colors long
+
+                ConvertFiles(Filenames, palette);
             }
             else {
                 // If none of PNG, SVG or GIF is specified, output PNG and SVG (previous default)
@@ -86,15 +97,28 @@ namespace Voxels.CommandLine {
             }
         }
 
-        void ConvertFiles(string[] filenames) {
+        void ExtractColors(string[] filenames, HashSet<Color> colorsUsed) {
             foreach (var filename in filenames) {
                 // Convert all files in directories
                 if (Directory.Exists(filename)) {
                     var directoryFilenames = Directory.GetFiles(filename);
-                    ConvertFiles(directoryFilenames);
+                    ExtractColors(directoryFilenames, colorsUsed);
                 }
                 else {
-                    var voxelData = ImageToVoxel.Import(filename);
+                    ImageToVoxel.ExtractColors(filename, colorsUsed);
+                }
+            }
+        }
+
+        void ConvertFiles(string[] filenames, Color[] pallete) {
+            foreach (var filename in filenames) {
+                // Convert all files in directories
+                if (Directory.Exists(filename)) {
+                    var directoryFilenames = Directory.GetFiles(filename);
+                    ConvertFiles(directoryFilenames, pallete);
+                }
+                else {
+                    var voxelData = ImageToVoxel.Import(filename, pallete);
                     if (voxelData != null) {
                         using (var stream = File.Create(Path.ChangeExtension(filename, ".vox"))) {
                             MagicaVoxel.Write(stream, voxelData);

@@ -121,7 +121,8 @@ namespace Voxels.CommandLine {
                     var voxelData = ImageToVoxel.Import(filename, pallete);
                     if (voxelData != null) {
                         using (var stream = File.Create(Path.ChangeExtension(filename, ".vox"))) {
-                            MagicaVoxel.Write(stream, voxelData);
+                            var magicaVoxel = new MagicaVoxel(voxelData);
+                            magicaVoxel.Write(stream);
                         }
                     }
                 }

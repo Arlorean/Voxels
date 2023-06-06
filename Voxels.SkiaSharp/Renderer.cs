@@ -68,7 +68,7 @@ namespace Voxels.SkiaSharp {
         static SKMatrix44 GetMatrix(VoxelData voxelData, RenderSettings renderSettings) {
             var s = renderSettings.Size;
             var r = 1.61803398875f;
-            var d = s / (r*voxelData.size.MaxDimension);
+            var d = s / (r*voxelData.Size.MaxDimension);
             var tran = SKMatrix44.CreateTranslate(s*0.5f, s*0.5f, 0);
             var rotx = SKMatrix44.CreateRotationDegrees(1, 0, 0, renderSettings.Pitch);
             var roty = SKMatrix44.CreateRotationDegrees(0, 1, 0, renderSettings.Yaw);
@@ -77,7 +77,7 @@ namespace Voxels.SkiaSharp {
             matrix.PreConcat(rotx);
             matrix.PreConcat(roty);
             matrix.PreScale(d, -d, d);
-            matrix.PreTranslate(-voxelData.size.X*0.5f, -voxelData.size.Z*0.5f, voxelData.size.Y*0.5f);
+            matrix.PreTranslate(-voxelData.Size.X*0.5f, -voxelData.Size.Z*0.5f, voxelData.Size.Y*0.5f);
             return matrix;
         }
 

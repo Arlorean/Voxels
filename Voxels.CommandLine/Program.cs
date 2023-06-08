@@ -39,6 +39,9 @@ namespace Voxels.CommandLine {
         [Option(Description = "Recurse into sub-directories to convert.")]
         public bool Recursive { get; set; }
 
+        [Option(Description = "Output filename ({0} - path minus extension, {1} - extension).")]
+        public string Output { get; set; } = "{0}.{1}";
+
         [Argument(0, Description = "Filenames or directories to convert."), Required]
         public string[] Filenames { get; set; }
 
@@ -91,17 +94,22 @@ namespace Voxels.CommandLine {
                     var voxelData = VoxelImport.Import(filename);
                     if (voxelData != null) {
                         if (PNG) {
-                            File.WriteAllBytes(Path.ChangeExtension(filename, ".png"), Renderer.RenderPng(voxelData, renderSettings));
+                            WriteOutput(filename, "png", Renderer.RenderPng(voxelData, renderSettings));
                         }
                         if (SVG) {
-                            File.WriteAllBytes(Path.ChangeExtension(filename, ".svg"), Renderer.RenderSvg(voxelData, renderSettings));
+                            WriteOutput(filename, "svg", Renderer.RenderSvg(voxelData, renderSettings));
                         }
                         if (GIF) {
-                            File.WriteAllBytes(Path.ChangeExtension(filename, ".gif"), Animation.RenderGif(voxelData, renderSettings, RotationFrames, RotationDuration));
+                            WriteOutput(filename, "gif", Animation.RenderGif(voxelData, renderSettings, RotationFrames, RotationDuration));
                         }
                     }
                 }
             }
+        }
+
+        void WriteOutput(string filename, string extension, byte[] bytes) {
+            var outputFilename = string.Format(Output, Path.ChangeExtension(filename, null), extension);
+            File.WriteAllBytes(outputFilename, bytes);
         }
 
         void ExtractColors(string[] filenames, HashSet<Color> colorsUsed) {

@@ -36,6 +36,9 @@ namespace Voxels.CommandLine {
         [Option(ShortName = "d", Description = "The duration for the animated GIF in seconds.")]
         public float RotationDuration { get; set; } = 2f;
 
+        [Option(Description = "Recurse into sub-directories to convert.")]
+        public bool Recursive { get; set; }
+
         [Argument(0, Description = "Filenames or directories to convert."), Required]
         public string[] Filenames { get; set; }
 
@@ -79,6 +82,10 @@ namespace Voxels.CommandLine {
                 if (Directory.Exists(filename)) {
                     var directoryFilenames = Directory.GetFiles(filename);
                     RenderFiles(directoryFilenames, renderSettings);
+                    if (Recursive) {
+                        var directoryNames = Directory.GetDirectories(filename);
+                        RenderFiles(directoryNames, renderSettings);
+                    }
                 }
                 else {
                     var voxelData = VoxelImport.Import(filename);

@@ -34,7 +34,7 @@ namespace Voxels.CommandLine {
         public int Frames { get; set; } = 30;
 
         [Option(Description = "The duration for the animated GIF in seconds.")]
-        public float Duration { get; set; } = 1f;
+        public float Duration { get; set; } = 2f;
 
         [Option(Description = "The number of camera orbits for the animated GIF (0=none, -1=clockwise.")]
         public int CameraOrbits { get; set; } = 1;
@@ -129,6 +129,10 @@ namespace Voxels.CommandLine {
                 if (Directory.Exists(filename)) {
                     var directoryFilenames = Directory.GetFiles(filename);
                     ExtractColors(directoryFilenames, colorsUsed);
+                    if (Recursive) {
+                        var directoryNames = Directory.GetDirectories(filename);
+                        ExtractColors(directoryNames, colorsUsed);
+                    }
                 }
                 else {
                     ImageToVoxel.ExtractColors(filename, colorsUsed);
@@ -142,6 +146,10 @@ namespace Voxels.CommandLine {
                 if (Directory.Exists(filename)) {
                     var directoryFilenames = Directory.GetFiles(filename);
                     ConvertFiles(directoryFilenames, pallete);
+                    if (Recursive) {
+                        var directoryNames = Directory.GetDirectories(filename);
+                        ConvertFiles(directoryNames, pallete);
+                    }
                 }
                 else {
                     var voxelData = ImageToVoxel.Import(filename, pallete);

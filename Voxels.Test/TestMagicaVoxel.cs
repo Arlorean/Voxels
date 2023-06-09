@@ -58,9 +58,10 @@ namespace Voxels.Test {
                 Assert.AreEqual(3132, magicaVoxel.Models[0].Count);
                 Assert.AreEqual(3235, magicaVoxel.Models[1].Count);
 
+                Assert.AreEqual(32, magicaVoxel.Layers.Count); // Not sure how this got created since the default layer count is 16
+
                 Assert.AreEqual(3132 + 3235, magicaVoxel.Flatten().Count);
             }
         }
-
     }
 }

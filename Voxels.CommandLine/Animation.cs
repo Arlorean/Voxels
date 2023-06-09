@@ -5,7 +5,7 @@ using Voxels.SkiaSharp;
 
 namespace Voxels.CommandLine {
     internal static class Animation {
-        public static byte[] RenderGif(VoxelData voxelData, RenderSettings renderSettings, int frames, float duration) {
+        public static byte[] RenderGif(MagicaVoxel magicaVoxel, RenderSettings renderSettings, int frames, float duration, int cameraOrbits) {
             var delay = (int)(duration / frames * 1000);
 
             var encoder = new AnimatedGifEncoder();
@@ -16,11 +16,14 @@ namespace Voxels.CommandLine {
             encoder.SetRepeat(0);
             encoder.SetTransparent(SKColors.Black);
 
+            var worldBounds = magicaVoxel.GetWorldAABB(0, frames - 1);
+
             var startAngle = renderSettings.Yaw;
-            var stepAngle = 360 / frames;
+            var stepAngle = (360*cameraOrbits) / frames;
             for (var i=0; i < frames; i++) {
                 renderSettings.Yaw = startAngle + stepAngle * i;
 
+                var voxelData = magicaVoxel.Flatten(worldBounds, i);
                 var bytes = Renderer.RenderPng(voxelData, renderSettings);
                 var image = SKImage.FromBitmap(SKBitmap.Decode(bytes));
                 encoder.AddFrame(image);

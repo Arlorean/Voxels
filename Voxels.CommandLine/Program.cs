@@ -30,11 +30,14 @@ namespace Voxels.CommandLine {
         [Option(Description = "Convert PNG file to VOX.")]
         public bool VOX { get; set; }
 
-        [Option(ShortName = "n", Description = "The number of frames for the animated GIF.")]
-        public int RotationFrames { get; set; } = 36;
+        [Option(Description = "The number of frames for the animated GIF.")]
+        public int Frames { get; set; } = 30;
 
-        [Option(ShortName = "d", Description = "The duration for the animated GIF in seconds.")]
-        public float RotationDuration { get; set; } = 2f;
+        [Option(Description = "The duration for the animated GIF in seconds.")]
+        public float Duration { get; set; } = 1f;
+
+        [Option(Description = "The number of camera orbits for the animated GIF (0=none, -1=clockwise.")]
+        public int CameraOrbits { get; set; } = 1;
 
         [Option(Description = "Recurse into sub-directories to convert.")]
         public bool Recursive { get; set; }
@@ -91,16 +94,24 @@ namespace Voxels.CommandLine {
                     }
                 }
                 else {
-                    var voxelData = VoxelImport.Import(filename);
-                    if (voxelData != null) {
-                        if (PNG) {
-                            WriteOutput(filename, "png", Renderer.RenderPng(voxelData, renderSettings));
+                    if (GIF) {
+                        // NOTE: MagicaVoxel only for now
+                        using (var stream = File.OpenRead(filename)) {
+                            var magicaVoxel = new MagicaVoxel();
+                            if (magicaVoxel.Read(stream)) {
+                                WriteOutput(filename, "gif", Animation.RenderGif(magicaVoxel, renderSettings, Frames, Duration, CameraOrbits));
+                            }
                         }
-                        if (SVG) {
-                            WriteOutput(filename, "svg", Renderer.RenderSvg(voxelData, renderSettings));
-                        }
-                        if (GIF) {
-                            WriteOutput(filename, "gif", Animation.RenderGif(voxelData, renderSettings, RotationFrames, RotationDuration));
+                    }
+                    else {
+                        var voxelData = VoxelImport.Import(filename);
+                        if (voxelData != null) {
+                            if (PNG) {
+                                WriteOutput(filename, "png", Renderer.RenderPng(voxelData, renderSettings));
+                            }
+                            if (SVG) {
+                                WriteOutput(filename, "svg", Renderer.RenderSvg(voxelData, renderSettings));
+                            }
                         }
                     }
                 }

@@ -13,7 +13,7 @@ namespace Voxels.CommandLine {
                 if (bitmap == null) return null;
 
                 var size = new XYZ(bitmap.Width, 1, bitmap.Height);
-                var voxelData = new VoxelData(size, palette);
+                var voxelData = new VoxelDataBytes(size, palette);
 
                 for (var x = 0; x < bitmap.Width; x++) {
                     for (var y = 0; y < bitmap.Height; y++) {

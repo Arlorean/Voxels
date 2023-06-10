@@ -11,7 +11,7 @@ namespace Voxels.ShellExtensions {
     public class ThumbnailHandlerQb : SharpThumbnailHandler {
         protected override Bitmap GetThumbnailImage(uint width) {
             var size = (int)width;
-            var voxelData = QbFile.Read(SelectedItemStream);
+            var voxelData = QbFile.ReadAndFlatten(SelectedItemStream);
             if (voxelData == null) {
                 return null;
             }

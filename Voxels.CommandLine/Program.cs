@@ -95,11 +95,25 @@ namespace Voxels.CommandLine {
                 }
                 else {
                     if (GIF) {
-                        // NOTE: MagicaVoxel only for now
                         using (var stream = File.OpenRead(filename)) {
-                            var magicaVoxel = new MagicaVoxel();
-                            if (magicaVoxel.Read(stream)) {
-                                WriteOutput(filename, "gif", Animation.RenderGif(magicaVoxel, renderSettings, Frames, Duration, CameraOrbits));
+                            // Support animation frames in MagicaVoxel
+                            if (Path.GetExtension(filename).ToLower() == ".vox") {
+                                var magicaVoxel = new MagicaVoxel();
+                                if (magicaVoxel.Read(stream)) {
+                                    var worldBounds = magicaVoxel.GetWorldAABB(0, Frames - 1);
+                                    WriteOutput(filename, "gif",
+                                        Animation.RenderGif(renderSettings, Frames, Duration, CameraOrbits,
+                                            worldBounds, i => magicaVoxel.Flatten(worldBounds, i))
+                                    );
+                                }
+                            }
+                            else {
+                                var voxelData = VoxelImport.Import(filename);
+                                var worldBounds = new BoundsXYZ(voxelData.Size);
+                                WriteOutput(filename, "gif",
+                                    Animation.RenderGif(renderSettings, Frames, Duration, CameraOrbits,
+                                        worldBounds, _ => voxelData)
+                                );
                             }
                         }
                     }
@@ -155,7 +169,7 @@ namespace Voxels.CommandLine {
                     var voxelData = ImageToVoxel.Import(filename, pallete);
                     if (voxelData != null) {
                         using (var stream = File.Create(Path.ChangeExtension(filename, ".vox"))) {
-                            var magicaVoxel = new MagicaVoxel(voxelData);
+                            var magicaVoxel = new MagicaVoxel((VoxelDataBytes)voxelData);
                             magicaVoxel.Write(stream);
                         }
                     }

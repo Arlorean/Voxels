@@ -46,6 +46,10 @@ namespace Voxels.Test {
             }
         }
 
+        /// <summary>
+        /// The cars.vox is the MagicaVoxel example of using multiple voxel models
+        /// with rotations and translations to place them in a larger world.
+        /// </summary>
         [Test]
         public void TestCars() {
             using (var stream = File.OpenRead("cars.vox")) {

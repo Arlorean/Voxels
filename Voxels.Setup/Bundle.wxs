@@ -4,7 +4,7 @@
   xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
   <!-- Source: https://gist.github.com/nathancorvussolis/6852ba282647aeb0c5c00e742e28eb48 -->
-  <Bundle Name="Voxels Shell Extensions" Version="1.6.0.0" Manufacturer="Arlorean"
+  <Bundle Name="Voxels Shell Extensions" Version="1.7.0.0" Manufacturer="Arlorean"
     Copyright="© 2023 Adam Davidson" AboutUrl="https://github.com/Arlorean/Voxels"
     UpgradeCode="{1823F323-C07E-4502-A4BA-CA8EDCA46161}" Condition="VersionNT &gt;= v5.1"
     IconSourceFile="Voxels.ico">

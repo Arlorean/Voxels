@@ -30,6 +30,9 @@ namespace Voxels.CommandLine {
         [Option(Description = "Convert PNG file to VOX.")]
         public bool VOX { get; set; }
 
+        [Option(Description = "Output a 3D Texture for Unity.", LongName = "3D")]
+        public bool Texture3D { get; set; }
+
         [Option(Description = "The number of frames for the animated GIF.")]
         public int Frames { get; set; } = 30;
 
@@ -69,7 +72,7 @@ namespace Voxels.CommandLine {
             }
             else {
                 // If none of PNG, SVG or GIF is specified, output PNG and SVG (previous default)
-                if (!PNG && !SVG && !GIF) {
+                if (!PNG && !SVG && !GIF && !Texture3D) {
                     PNG = SVG = true;
                 }
 
@@ -125,6 +128,11 @@ namespace Voxels.CommandLine {
                             }
                             if (SVG) {
                                 WriteOutput(filename, "svg", Renderer.RenderSvg(voxelData, renderSettings));
+                            }
+                            if (Texture3D) {
+                                Slicer.MakeSquare(voxelData.Size, out var rows, out var columns);
+
+                                WriteOutput(filename, $"({columns}x{rows}).png", Slicer.RenderTexture3D(voxelData, columns, rows));
                             }
                         }
                     }
